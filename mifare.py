@@ -244,129 +244,129 @@ def Write(block_No, block_quantity, block_data):
 		# raise write_exp()
 		print "write err"
 
-def buzz_10():
-	ser.write(chr(2))
-	ser.write(chr(0))
-	ser.write(chr(2))
-	ser.write(chr(44))
-	ser.write(chr(10))
-	ser.write(chr(36))
-	result = ser.read(64)
-	print ":".join("{0:x}".format(ord(c)) for c in result)
+# def buzz_10():
+# 	ser.write(chr(2))
+# 	ser.write(chr(0))
+# 	ser.write(chr(2))
+# 	ser.write(chr(44))
+# 	ser.write(chr(10))
+# 	ser.write(chr(36))
+# 	result = ser.read(64)
+# 	print ":".join("{0:x}".format(ord(c)) for c in result)
 
-def request_all():
-	ser.write(chr(2))
-	ser.write(chr(0))
-	ser.write(chr(2))
-	ser.write(chr(49))
-	ser.write(chr(82))
-	ser.write(chr(97))
-	ser.write(chr(26))
-	result = ser.read(64)
-	print ":".join("{0:x}".format(ord(c)) for c in result)
+# def request_all():
+# 	ser.write(chr(2))
+# 	ser.write(chr(0))
+# 	ser.write(chr(2))
+# 	ser.write(chr(49))
+# 	ser.write(chr(82))
+# 	ser.write(chr(97))
+# 	ser.write(chr(26))
+# 	result = ser.read(64)
+# 	print ":".join("{0:x}".format(ord(c)) for c in result)
 
-def anti_coll():
-	ser.write(chr(2))
-	ser.write(chr(0))
-	ser.write(chr(2))
-	ser.write(chr(50))
-	ser.write(chr(147))
-	ser.write(chr(163))
-	ser.write(chr(26))
-	result = ser.read(64)
-	#result = filter(lambda x:x in string.printable, result)
-	result = ":".join("{0:x}".format(ord(c)) for c in result)
-	print result
-	return result
+# def anti_coll():
+# 	ser.write(chr(2))
+# 	ser.write(chr(0))
+# 	ser.write(chr(2))
+# 	ser.write(chr(50))
+# 	ser.write(chr(147))
+# 	ser.write(chr(163))
+# 	ser.write(chr(26))
+# 	result = ser.read(64)
+# 	#result = filter(lambda x:x in string.printable, result)
+# 	result = ":".join("{0:x}".format(ord(c)) for c in result)
+# 	print result
+# 	return result
 
-def select(id):
-	myarr1 = id.split(':')[4:][:-1]
-	print myarr1
-	xorr = 0
-	for item in myarr1:
-		xorr = xorr ^ int(item, 16)
-	xorr = xorr ^ int(6)
-	xorr = xorr ^ int(51)
-	xorr = xorr ^ int(147)
+# def select(id):
+# 	myarr1 = id.split(':')[4:][:-1]
+# 	print myarr1
+# 	xorr = 0
+# 	for item in myarr1:
+# 		xorr = xorr ^ int(item, 16)
+# 	xorr = xorr ^ int(6)
+# 	xorr = xorr ^ int(51)
+# 	xorr = xorr ^ int(147)
 
-	ser.write(chr(2))
-	ser.write(chr(0))
-	ser.write(chr(6))
-	ser.write(chr(51))
-	ser.write(chr(147))
-	for item in myarr1:
-		ser.write(chr(int(item, 16)))
-	ser.write(chr(xorr))
-	ser.write(chr(26))
-	print "select:"
-	result = ser.read(64)
-	result = ":".join("{0:x}".format(ord(c)) for c in result)
-	print result
+# 	ser.write(chr(2))
+# 	ser.write(chr(0))
+# 	ser.write(chr(6))
+# 	ser.write(chr(51))
+# 	ser.write(chr(147))
+# 	for item in myarr1:
+# 		ser.write(chr(int(item, 16)))
+# 	ser.write(chr(xorr))
+# 	ser.write(chr(26))
+# 	print "select:"
+# 	result = ser.read(64)
+# 	result = ":".join("{0:x}".format(ord(c)) for c in result)
+# 	print result
 
-def authentication(id):
-	ser.write(chr(2))
-	ser.write(chr(0))
-	ser.write(chr(7))
-	ser.write(chr(55))
-	ser.write(chr(96))
-	ser.write(chr(blockNtxt))
-	myarr1 = id.split(':')[4:][:-1]
-	# serial = "".join(c for c in myarr1)
-	xorr = 0
-	for item in myarr1:
-		xorr = xorr ^ int(item, 16)
-		ser.write(chr(int(item, 16)))
+# def authentication(id):
+# 	ser.write(chr(2))
+# 	ser.write(chr(0))
+# 	ser.write(chr(7))
+# 	ser.write(chr(55))
+# 	ser.write(chr(96))
+# 	ser.write(chr(blockNtxt))
+# 	myarr1 = id.split(':')[4:][:-1]
+# 	# serial = "".join(c for c in myarr1)
+# 	xorr = 0
+# 	for item in myarr1:
+# 		xorr = xorr ^ int(item, 16)
+# 		ser.write(chr(int(item, 16)))
 
-	xorr = xorr ^ int(7)
-	xorr = xorr ^ int(55)
-	xorr = xorr ^ int(blockNtxt)
-	xorr = xorr ^ int(96)
-	ser.write(chr(xorr))
-	ser.write(chr(26))
-	print "aut"
-	result = ser.read(64)
-	result = ":".join("{0:x}".format(ord(c)) for c in result)
-	print result
+# 	xorr = xorr ^ int(7)
+# 	xorr = xorr ^ int(55)
+# 	xorr = xorr ^ int(blockNtxt)
+# 	xorr = xorr ^ int(96)
+# 	ser.write(chr(xorr))
+# 	ser.write(chr(26))
+# 	print "aut"
+# 	result = ser.read(64)
+# 	result = ":".join("{0:x}".format(ord(c)) for c in result)
+# 	print result
 
-def read():
-	ser.write(chr(2))
-	ser.write(chr(0))
-	ser.write(chr(3))
-	ser.write(chr(56))
-	ser.write(chr(blockNtxt))
-	ser.write(chr(1))
-	xor2 = 0
-	xor2 = xor2 ^ 3 ^ 56 ^ (blockNtxt) ^ 1
-	ser.write(chr(xor2))
-	ser.write(chr(26))
-	print "READ:"
-	result = ser.read(64)
-	result = ":".join("{0:x}".format(ord(c)) for c in result)
-	print result
+# def read():
+# 	ser.write(chr(2))
+# 	ser.write(chr(0))
+# 	ser.write(chr(3))
+# 	ser.write(chr(56))
+# 	ser.write(chr(blockNtxt))
+# 	ser.write(chr(1))
+# 	xor2 = 0
+# 	xor2 = xor2 ^ 3 ^ 56 ^ (blockNtxt) ^ 1
+# 	ser.write(chr(xor2))
+# 	ser.write(chr(26))
+# 	print "READ:"
+# 	result = ser.read(64)
+# 	result = ":".join("{0:x}".format(ord(c)) for c in result)
+# 	print result
 
-def write(value):
-	ser.write(chr(2))
-	ser.write(chr(0))
-	ser.write(chr(19))
-	ser.write(chr(57))
-	ser.write(chr(blockNtxt))
-	ser.write(chr(1))
-	writeTxt = value
-	xor3 = 0
-	for item in writeTxt:
-		ser.write(item)
-		xor3 = xor3 ^ ord(item)
-		print ord(item)
-	xor3 = xor3 ^ 19
-	xor3 = xor3 ^ 57
-	xor3 = xor3 ^ blockNtxt
-	xor3 = xor3 ^ 1
-	ser.write(chr(xor3))
-	ser.write(chr(26))
-	print "write:"
-	result = ser.read(64)
-	result = ":".join("{0:x}".format(ord(c)) for c in result)
-	print result
+# def write(value):
+# 	ser.write(chr(2))
+# 	ser.write(chr(0))
+# 	ser.write(chr(19))
+# 	ser.write(chr(57))
+# 	ser.write(chr(blockNtxt))
+# 	ser.write(chr(1))
+# 	writeTxt = value
+# 	xor3 = 0
+# 	for item in writeTxt:
+# 		ser.write(item)
+# 		xor3 = xor3 ^ ord(item)
+# 		print ord(item)
+# 	xor3 = xor3 ^ 19
+# 	xor3 = xor3 ^ 57
+# 	xor3 = xor3 ^ blockNtxt
+# 	xor3 = xor3 ^ 1
+# 	ser.write(chr(xor3))
+# 	ser.write(chr(26))
+# 	print "write:"
+# 	result = ser.read(64)
+# 	result = ":".join("{0:x}".format(ord(c)) for c in result)
+# 	print result
 
 # Buzz_Control()
 # Device_LED_Control()
