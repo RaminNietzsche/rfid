@@ -385,6 +385,6 @@ Authentication(0x60, 4, card_No)
 # select (id)
 # authentication(id)
 # # write("111")
-read()
+# read()
 
 ser.close()
